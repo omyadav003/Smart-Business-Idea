@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Business Idea Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:linear-gradient(135deg,#0f172a,#1e3a8a,#06b6d4);min-height:100vh;color:#fff}
+header{text-align:center;padding:40px 20px}
+h1{font-size:42px}.sub{opacity:.9;margin-top:10px}
+.wrap{max-width:1100px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px}
+.cardcat{background:rgba(255,255,255,.1);padding:18px;border-radius:16px;text-align:center;cursor:pointer;border:2px solid transparent}
+.cardcat:hover,.active{border-color:#22d3ee;background:rgba(255,255,255,.18)}
+.btn{display:block;margin:30px auto;padding:16px 32px;border:none;border-radius:40px;background:#22d3ee;color:#06203b;font-weight:700;font-size:18px;cursor:pointer}
+.result{display:none;margin-top:25px;background:rgba(255,255,255,.12);padding:25px;border-radius:20px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:20px}
+.box{background:rgba(255,255,255,.1);padding:15px;border-radius:12px}
+footer{text-align:center;padding:25px;opacity:.7}
+#root{position:fixed;right:20px;bottom:20px;z-index:9999}
+</style></head>
+<body>
+<header><h1>💡 Smart Business Idea Generator</h1><p class="sub">Discover AI-powered startup ideas instantly</p></header>
+<div class="wrap">
+<div class="grid" id="cats"></div>
+<button class="btn" onclick="generate()">🚀 Generate Business Idea</button>
+<div class="result" id="result">
+<h2 id="title"></h2>
+<p id="desc"></p>
+<div class="info">
+<div class="box"><b>💰 Investment</b><p id="inv"></p></div>
+<div class="box"><b>⚡ Difficulty</b><p id="dif"></p></div>
+<div class="box"><b>📈 Potential</b><p id="pot"></p></div>
+</div>
+</div>
+</div>
+<footer>©2026 Smart Business Idea Generator</footer>
+<div id="root"></div>
+<script>
+const ideas={
+Technology:[{t:"AI Resume Builder",d:"Create ATS-friendly resumes using AI.",i:"₹50K-2L",f:"Medium",p:"★★★★★"},{t:"Cyber Security Consultancy",d:"Security audits and penetration testing.",i:"₹1L-5L",f:"High",p:"★★★★★"}],
+Food:[{t:"Cloud Kitchen",d:"Operate multiple brands from one kitchen.",i:"₹2L",f:"Medium",p:"★★★★★"}],
+Education:[{t:"Online Coding Academy",d:"Teach coding online.",i:"₹40K",f:"Easy",p:"★★★★★"}],
+Health:[{t:"Fitness Coaching",d:"Workout and nutrition platform.",i:"₹50K",f:"Easy",p:"★★★★★"}],
+Environment:[{t:"Solar Installation",d:"Residential solar services.",i:"₹5L",f:"High",p:"★★★★★"}],
+Fashion:[{t:"Custom T-Shirts",d:"Sell personalized apparel.",i:"₹80K",f:"Easy",p:"★★★★☆"}],
+Finance:[{t:"Expense Tracker",d:"Personal finance app.",i:"₹1L",f:"Medium",p:"★★★★★"}]
+};
+let current="Technology";
+const cats=document.getElementById("cats");
+Object.keys(ideas).forEach((c,n)=>{let d=document.createElement("div");d.className="cardcat"+(n==0?" active":"");d.textContent=c;d.onclick=()=>{current=c;document.querySelectorAll(".cardcat").forEach(x=>x.classList.remove("active"));d.classList.add("active");};cats.appendChild(d);});
+function generate(){
+const arr=ideas[current];const r=arr[Math.floor(Math.random()*arr.length)];
+title.textContent=r.t;desc.textContent=r.d;inv.textContent=r.i;dif.textContent=r.f;pot.textContent=r.p;result.style.display="block";
+}
+window.wxOConfiguration={orchestrationID:"9bde9b585501437e8ef5340619641f67_73debc82-3efe-489d-9979-672c78434407",hostURL:"https://au-syd.watson-orchestrate.cloud.ibm.com",rootElementID:"root",deploymentPlatform:"ibmcloud",crn:"crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/9bde9b585501437e8ef5340619641f67:73debc82-3efe-489d-9979-672c78434407::",chatOptions:{agentId:"d65063be-ade9-4372-b3e4-1c99e9cfb226"}};
+const s=document.createElement("script");s.src=window.wxOConfiguration.hostURL+"/wxochat/wxoLoader.js?embed=true";s.onload=()=>wxoLoader.init();document.head.appendChild(s);
+</script>
+</body></html>
